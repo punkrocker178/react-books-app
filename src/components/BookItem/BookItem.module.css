@@ -1,0 +1,14 @@
+.book-container {
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 12rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5 {
+    padding-top: 0;
+}
