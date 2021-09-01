@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './BookList.module.css';
 import BookItem from '../BookItem/BookItem';
+import SearchComponent from '../Search/Search';
 
 interface BookVolumes {
   items: any[];
@@ -23,30 +24,42 @@ class BookList extends Component<{}, {
   });
 
   render() {
-    if (this.state && this.state.booksCollection.totalItems > 0 && !this.state.isLoading) {
-      return <div>
-        <div className={styles.container}>{
-          this.state.booksCollection.items.map((book, index: number) => {
-            return <BookItem book={book} key={index}></BookItem>
-          })
-        }
+    let bookListView =
+      <div>
+				<SearchComponent></SearchComponent>
+
+        <div>
+          <input type="text"
+            value={this.state.search}
+            name="searchBooks"
+            onChange={this.onInputChange}></input>
+          <button onClick={this.search}>Search</button>
         </div>
-        <button onClick={this.loadMore}>Load more</button>
+
+        {
+          this.state.booksCollection.totalItems > 0 ?
+            <div>
+              <div className={styles.container}>{
+                this.state.booksCollection.items.map((book, index: number) => {
+                  return <BookItem book={book} key={index}></BookItem>
+                })
+              }
+              </div>
+              <button onClick={this.loadMore}>Load more</button>
+            </div> : null
+        }
+
+
+        {
+          this.state.isLoading ?
+            <div>
+              <span>Loading...</span>
+            </div> : null
+        }
+
       </div>
 
-    } else if (this.state && this.state.isLoading) {
-      return <div>
-        <span>Loading...</span>
-      </div>
-    } else {
-      return <div>
-        <input type="text"
-          value={this.state.search}
-          name="searchBooks"
-          onChange={this.onInputChange}></input>
-        <button onClick={this.search}>Search</button>
-      </div>
-    }
+    return bookListView;
   }
 
   constructor(props: any) {
@@ -128,10 +141,10 @@ class BookList extends Component<{}, {
 
   loadMore() {
     const request = async () => {
-      
+
       const res = await this.getBooks({
         params: {
-          q: 'inauthor:Stephen King',
+          q: `inauthor:${this.search}`,
           key: this.API_KEY,
           startIndex: this.state.startIndex,
           maxResults: 20
