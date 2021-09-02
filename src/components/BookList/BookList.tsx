@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './BookList.module.css';
 import BookItem from '../BookItem/BookItem';
 import SearchComponent from '../Search/Search';
+import { SearchData } from '../../models/SearchData.interface';
 
 interface BookVolumes {
   items: any[];
@@ -14,7 +15,7 @@ class BookList extends Component<{}, {
   booksCollection: BookVolumes,
   isLoading: boolean,
   startIndex: number,
-  search: string
+	searchTerm: string
 }> {
 
   readonly API_KEY = 'AIzaSyD06ROqqvFrC90kOAWd7zQG3Zm8v9jdsJo';
@@ -26,15 +27,7 @@ class BookList extends Component<{}, {
   render() {
     let bookListView =
       <div>
-				<SearchComponent></SearchComponent>
-
-        <div>
-          <input type="text"
-            value={this.state.search}
-            name="searchBooks"
-            onChange={this.onInputChange}></input>
-          <button onClick={this.search}>Search</button>
-        </div>
+				<SearchComponent searchCallback={this.searchCallBack}></SearchComponent>
 
         {
           this.state.booksCollection.totalItems > 0 ?
@@ -72,11 +65,10 @@ class BookList extends Component<{}, {
         kind: '',
         totalItems: 0
       },
-      search: ''
+			searchTerm: ''
     };
+		this.searchCallBack = this.searchCallBack.bind(this);
     this.loadMore = this.loadMore.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
@@ -116,17 +108,37 @@ class BookList extends Component<{}, {
     });
   }
 
-  onInputChange(event: any) {
-    this.setState({
-      search: event.target.value
-    })
-  }
+	searchCallBack(searchData: SearchData) {
+		let searchTerm = '';
+		let isSingleSearch = false;
+		
+		if (searchData.searchTitle) {
+			searchTerm += `intitle:${searchData.searchTitle}`;
+		}
 
-  search() {
+		if (searchData.searchAuthor) {
+			isSingleSearch = !(!!searchData.searchTitle || !!searchData.searchPublisher);
+			searchTerm += `${!isSingleSearch ? '+': ''}inauthor:${searchData.searchAuthor}`;
+		}
+
+		if (searchData.searchPublisher) {
+			isSingleSearch = !(!!searchData.searchTitle || !!searchData.searchAuthor);
+			searchTerm += `${!isSingleSearch ? '+': ''}inpublisher:${searchData.searchPublisher}`;
+		}
+
+		this.setState({
+			searchTerm: searchTerm
+		})
+
+		this.search(searchTerm);
+
+	}
+
+  search(searchTerm: string) {
     const request = async () => {
       const res = await this.getBooks({
         params: {
-          q: `inauthor:${this.state.search}`,
+          q: searchTerm,
           key: this.API_KEY,
           startIndex: this.state.startIndex,
           maxResults: 20
@@ -144,7 +156,7 @@ class BookList extends Component<{}, {
 
       const res = await this.getBooks({
         params: {
-          q: `inauthor:${this.search}`,
+          q: this.state.searchTerm,
           key: this.API_KEY,
           startIndex: this.state.startIndex,
           maxResults: 20
