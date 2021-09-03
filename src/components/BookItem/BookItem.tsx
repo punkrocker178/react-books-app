@@ -14,7 +14,7 @@ interface Book {
 function BookItem(props: any) {
     const book: Book = props.book;
     return <div className={styles['book-container']}>
-        <h5>{book.volumeInfo['title']}</h5>
+        <h6>{book.volumeInfo['title']}</h6>
         <div className="crop-height">
             <img className="img-fluid" src={book.volumeInfo['imageLinks'] ? book.volumeInfo['imageLinks']['thumbnail']: ''}></img>
         </div>

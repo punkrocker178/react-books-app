@@ -1,3 +1,8 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+@import './skeleton/normalize.css';
+@import './skeleton/skeleton.css';
+@import './components/utilities.css';
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

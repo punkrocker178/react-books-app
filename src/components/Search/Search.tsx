@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { createPopper } from '@popperjs/core';
 import './Search.css';
 
-
-
 class SearchComponent extends Component<{
 	searchCallback: any
 }, {
@@ -12,12 +10,15 @@ class SearchComponent extends Component<{
 	searchPublisher: string
 }> {
 	showPopover = false;
+	tooltip: HTMLElement;
 
 	render() {
-		return <div>
-			<button id="button">Advanced Search</button>
+		return <div className='search-container'>
+			<button id="button" className='advanced-search-btn me-2'>
+				<i className="bi bi-gear"></i>
+			</button>
 
-			<div id="tooltip" role="tooltip">
+			<div id="advanced-search" className="tooltip" role="tooltip">
 
 				<div>
 					<label htmlFor='authorInput'>Author</label>
@@ -28,10 +29,10 @@ class SearchComponent extends Component<{
 					<input name='publisherInput' type='text' onChange={this.publisherOnChange}></input>
 				</div>
 
-				<div id="arrow" data-popper-arrow></div>
+				<div className="arrow" data-popper-arrow></div>
 			</div>
 
-			<input type='text' onChange={this.titleOnChange}></input>
+			<input className='search-input me-2' type='text' onChange={this.titleOnChange}></input>
 			<button onClick={this.search}>Search</button>
 		</div>
 	}
@@ -48,8 +49,8 @@ class SearchComponent extends Component<{
 	componentDidMount() {
 
 		const button: any = document.querySelector('#button');
-		const tooltip: any = document.querySelector('#tooltip');
-		const popperInstance = createPopper(button, tooltip, {
+		this.tooltip = document.querySelector('#advanced-search')!;
+		const popperInstance = createPopper(button, this.tooltip, {
 			modifiers: [
 				{
 					name: 'offset',
@@ -64,9 +65,9 @@ class SearchComponent extends Component<{
 			this.showPopover = !this.showPopover;
 
 			if (this.showPopover) {
-				tooltip.setAttribute('data-show', '');
+				this.tooltip.setAttribute('data-show', '');
 			} else {
-				tooltip.removeAttribute('data-show');
+				this.tooltip.removeAttribute('data-show');
 			}
 
 			popperInstance.update();
@@ -93,6 +94,7 @@ class SearchComponent extends Component<{
 	}
 
 	search() {
+		this.tooltip.removeAttribute('data-show');
 		const searchData = this.state;
 		this.props.searchCallback({
 			...searchData

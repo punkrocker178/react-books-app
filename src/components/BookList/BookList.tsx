@@ -127,7 +127,12 @@ class BookList extends Component<{}, {
 		}
 
 		this.setState({
-			searchTerm: searchTerm
+			searchTerm: searchTerm,
+			booksCollection: {
+				items: [],
+				totalItems: 0,
+				kind: ''
+			}
 		})
 
 		this.search(searchTerm);

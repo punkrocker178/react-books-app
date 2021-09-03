@@ -1,4 +1,8 @@
-#tooltip {
+.search-container {
+	margin-top: 2rem;
+}
+
+.tooltip {
 	display: none;
 	background: #CCCCCC;
 	color: white;
@@ -8,40 +12,50 @@
 	border-radius: 4px;
 }
 
-#tooltip[data-show] {
+.tooltip[data-show] {
   display: block;
 }
 
-#arrow,
-#arrow::before {
+.arrow,
+.arrow::before {
   position: absolute;
   width: 8px;
   height: 8px;
   background: inherit;
 }
 
-#arrow {
+.arrow {
   visibility: hidden;
 }
 
-#arrow::before {
+.arrow::before {
   visibility: visible;
   content: '';
   transform: rotate(45deg);
 }
 
-#tooltip[data-popper-placement^='top'] > #arrow {
+.tooltip[data-popper-placement^='top'] > .arrow {
   bottom: -4px;
 }
 
-#tooltip[data-popper-placement^='bottom'] > #arrow {
+.tooltip[data-popper-placement^='bottom'] > .arrow {
   top: -4px;
 }
 
-#tooltip[data-popper-placement^='left'] > #arrow {
+.tooltip[data-popper-placement^='left'] > .arrow {
   right: -4px;
 }
 
-#tooltip[data-popper-placement^='right'] > #arrow {
+.tooltip[data-popper-placement^='right'] > .arrow {
   left: -4px;
+}
+
+.advanced-search-btn {
+	border: 0;
+	font-size: 1em;
+}
+
+#advanced-search > div > input {
+	color: #222;
+	font-weight: 400;
 }

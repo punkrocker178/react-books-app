@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './assets/images/logo.svg';
 import BookList from './components/BookList/BookList';
 import '../src/assets/css/components/App.css';
-import Clock from './components/Clock';
+import Clock from './components/Clock/Clock';
 
 function App() {
   return (
