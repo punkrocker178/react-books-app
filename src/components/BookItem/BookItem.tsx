@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './BookItem.module.css';
+import bookIcon from '../../assets/images/open-book.png';
 
 interface Book {
     accessInfo: any,
@@ -13,12 +14,12 @@ interface Book {
 
 function BookItem(props: any) {
     const book: Book = props.book;
-    return <div className={styles['book-container']}>
-        <h6>{book.volumeInfo['title']}</h6>
-        <div className="crop-height">
-            <img className="img-fluid" src={book.volumeInfo['imageLinks'] ? book.volumeInfo['imageLinks']['thumbnail']: ''}></img>
+    return <div className={`${styles['book-container']}`}>
+        <h6 className={`${styles['text']} ${styles['truncate-height']}`}>{book.volumeInfo['title']}</h6>
+        <div className={`crop-height ${styles['image-container']}`}>
+            <img className={`img-fluid ${!book.volumeInfo['imageLinks'] ? styles['bookIcon'] : ''}`} src={book.volumeInfo['imageLinks'] ? book.volumeInfo['imageLinks']['thumbnail']: bookIcon}></img>
         </div>
-        <span>{book.volumeInfo['subtitle']}</span>
+        <span className={`${styles['text']} ${styles['truncate-height']}`}>{book.volumeInfo['subtitle']}</span>
     </div>
 }
 
