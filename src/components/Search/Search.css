@@ -4,12 +4,13 @@
 
 .tooltip {
 	display: none;
-	background: #CCCCCC;
-	color: white;
+	background: white;
 	font-weight: bold;
 	padding: 4px 8px;
 	font-size: 13px;
 	border-radius: 4px;
+	border: 1px solid #D1D1D1;
+	box-shadow: 0 0 4px #c0c0c0;
 }
 
 .tooltip[data-show] {
@@ -19,9 +20,12 @@
 .arrow,
 .arrow::before {
   position: absolute;
+	left: -2px;
   width: 8px;
   height: 8px;
   background: inherit;
+	border-left: 1px solid #D1D1D1;
+	border-top: 1px solid #D1D1D1;
 }
 
 .arrow {

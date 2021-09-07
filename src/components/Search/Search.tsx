@@ -51,6 +51,7 @@ class SearchComponent extends Component<{
 		const button: any = document.querySelector('#button');
 		this.tooltip = document.querySelector('#advanced-search')!;
 		const popperInstance = createPopper(button, this.tooltip, {
+			placement: 'top',
 			modifiers: [
 				{
 					name: 'offset',

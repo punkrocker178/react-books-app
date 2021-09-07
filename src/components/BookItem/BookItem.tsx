@@ -19,7 +19,11 @@ function BookItem(props: any) {
         <div className={`crop-height ${styles['image-container']}`}>
             <img className={`img-fluid ${!book.volumeInfo['imageLinks'] ? styles['bookIcon'] : ''}`} src={book.volumeInfo['imageLinks'] ? book.volumeInfo['imageLinks']['thumbnail']: bookIcon}></img>
         </div>
-        <span className={`${styles['text']} ${styles['truncate-height']}`}>{book.volumeInfo['subtitle']}</span>
+				{
+					book.volumeInfo['authors'] && book.volumeInfo['authors'].length > 0  ?
+					<span className={`${styles['text']} ${styles['truncate-height']}`}>{book.volumeInfo['authors'].join(', ')}</span> : null
+				}
+        
     </div>
 }
 

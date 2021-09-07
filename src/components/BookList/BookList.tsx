@@ -28,6 +28,8 @@ class BookList extends Component<{}, {
 	render() {
 		let bookListView =
 			<div>
+				<h5 className="mt-2">Search your favorite books</h5>
+
 				<SearchComponent searchCallback={this.searchCallBack}></SearchComponent>
 
 				{
