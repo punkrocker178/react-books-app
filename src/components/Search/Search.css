@@ -1,5 +1,10 @@
 .search-container {
 	margin-top: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 .tooltip {
@@ -62,4 +67,13 @@
 #advanced-search {
 	color: #222;
 	font-weight: 400;
+}
+
+.flex-item {
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.search-input.flex-item {
+	flex-grow: 4;
 }

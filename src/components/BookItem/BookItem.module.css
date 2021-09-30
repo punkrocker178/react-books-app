@@ -37,11 +37,6 @@
 		cursor: pointer;
 		margin-bottom: 1rem;
 	}
-
-	.bookIcon {
-		width: 70%;
-	}
-	
 }
 
 @media (min-width: 480px) {
@@ -56,11 +51,6 @@
 		cursor: pointer;
 		margin-bottom: 1rem;
 	}
-
-	.bookIcon {
-		width: 65%;
-	}
-	
 }
 
 @media (min-width: 768px) {
@@ -75,9 +65,4 @@
 		cursor: pointer;
 		margin-bottom: 1rem;
 	}
-
-	.bookIcon {
-		width: 60%;
-	}
-	
 }

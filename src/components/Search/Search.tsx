@@ -14,7 +14,7 @@ class SearchComponent extends Component<{
 
 	render() {
 		return <div className='search-container'>
-			<button id="button" className='advanced-search-btn me-2'>
+			<button id="button" className='advanced-search-btn me-2 flex-item'>
 				<i className="bi bi-gear"></i>
 			</button>
 
@@ -32,8 +32,8 @@ class SearchComponent extends Component<{
 				<div className="arrow" data-popper-arrow></div>
 			</div>
 
-			<input className='search-input me-2' type='text' onChange={this.titleOnChange}></input>
-			<button onClick={this.search}>Search</button>
+			<input className='search-input me-2 flex-item' type='text' onChange={this.titleOnChange}></input>
+			<button className='flex-item' onClick={this.search}>Search</button>
 		</div>
 	}
 

@@ -4,14 +4,32 @@ import styles from './BookList.module.css';
 import BookItem from '../BookItem/BookItem';
 import SearchComponent from '../Search/Search';
 import { SearchData } from '../../models/SearchData.interface';
+import { connect } from 'react-redux';
+import { setBooks } from '../../features/books/bookReducer';
+import { BookDetail } from '../BookDetail/BookDetail';
+import { getId } from '../../selectors/selectors';
+export interface Book {
+	kind: string,
+	id: string,
+	etag: string,
+	selfLink: string,
+	volumeInfo: any,
+	saleInfo: any,
+	accessInfo: any,
+	searchInfo: any
+}
 
-interface BookVolumes {
+export interface BookVolumes {
+	bookId?: string;
 	items: any[];
 	kind: string;
 	totalItems: number;
 }
 
-class BookList extends Component<{}, {
+class BookList extends Component<{
+	setBooks: any,
+	bookId: string
+}, {
 	booksCollection: BookVolumes,
 	errorMsg: string,
 	isLoading: boolean,
@@ -27,14 +45,14 @@ class BookList extends Component<{}, {
 
 	render() {
 		let bookListView =
-			<div>
+			<div className={styles.container}>
 				<h5 className="mt-2">Search your favorite books</h5>
 
 				<SearchComponent searchCallback={this.searchCallBack}></SearchComponent>
 
 				{
 					this.state.booksCollection.totalItems > 0 ?
-						<div className={styles.container}>{
+						<div className={styles['books-container']}>{
 							this.state.booksCollection.items.map((book, index: number) => {
 								return <BookItem book={book} key={index}></BookItem>
 							})
@@ -63,9 +81,9 @@ class BookList extends Component<{}, {
 
 			</div>
 
+		const detailView = <BookDetail bookId={this.props.bookId}></BookDetail>;
 
-
-		return bookListView;
+		return !this.props.bookId ? bookListView : detailView;
 	}
 
 	constructor(props: any) {
@@ -85,9 +103,8 @@ class BookList extends Component<{}, {
 		this.loadMore = this.loadMore.bind(this);
 	}
 
-	componentDidMount() {
 
-	}
+	componentDidMount() { }
 
 	// Functional programming & closure
 
@@ -122,6 +139,9 @@ class BookList extends Component<{}, {
 				kind: res.data.kind,
 				totalItems: this.state.booksCollection.totalItems + res.data.totalItems
 			};
+
+			this.props.setBooks(newBookCollection);
+
 			this.setState({
 				isLoading: false,
 				booksCollection: newBookCollection
@@ -204,7 +224,6 @@ class BookList extends Component<{}, {
 		}, request);
 	}
 
-
-
 }
-export default BookList;
+
+export default connect((state: any) => ({bookId: getId(state)}), { setBooks })(BookList);
