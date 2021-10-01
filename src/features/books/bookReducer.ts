@@ -21,10 +21,16 @@ export const booksSlice = createSlice({
 				...state,
 				bookId: id
 			};
+		},
+		removeId: (state: any) => {
+			return {
+				...state,
+				bookId: null
+			}
 		}
 	}
 });
 
 // Action creators are generated for each case reducer function
-export const { setBooks, setId } = booksSlice.actions;
+export const { setBooks, setId, removeId } = booksSlice.actions;
 export default booksSlice.reducer;

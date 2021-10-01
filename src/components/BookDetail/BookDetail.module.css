@@ -1,0 +1,49 @@
+.book-detail {
+	text-align: initial;
+}
+
+.title-section {
+	padding: 2rem 2rem 2rem 0;
+	display: flex;
+	flex-direction: row;
+}
+
+.title-section > button {
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+.title-section > h5 {
+	flex-basis: 0;
+	flex-grow: 9;
+	text-align: center;
+}
+
+.book-info {
+	display: flex;
+	flex-direction: row;
+}
+
+.book-info > .image {
+	flex-basis: 0;
+	flex-grow: 1;
+	padding: 1rem;
+}
+
+.book-info > .info {
+	flex-basis: 0;
+	flex-grow: 5;
+	display: flex;
+	flex-direction: column;
+}
+
+.info-item {
+	display: flex;
+	flex-direction: row;
+	padding: 1rem;
+}
+
+.info-item h6 {
+	margin-bottom: 0;
+	margin-right: .5rem;
+}
