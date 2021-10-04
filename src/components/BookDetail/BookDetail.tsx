@@ -6,6 +6,8 @@ import { Book } from "../BookList/BookList";
 import bookIcon from '../../assets/images/open-book.png';
 import { removeId } from "../../features/books/bookReducer";
 import styles from "./BookDetail.module.css";
+import leftArrow from '../../assets/images/left-arrow.png';
+import starIcon from '../../assets/images/star.png';
 
 export const BookDetail = (props: any) => {
 	const dispatch = useDispatch();
@@ -18,7 +20,8 @@ export const BookDetail = (props: any) => {
 	return (<div className={styles['book-detail']}>
 
 		<div className={styles['title-section']}>
-			<button onClick={goBack}>Back</button>
+			<button onClick={goBack} className={styles['flex-btn']}>
+				<img className={styles['back-icon']} src={leftArrow}></img></button>
 			<h5>{bookDetail.volumeInfo['title']}</h5>
 		</div>
 
@@ -36,7 +39,7 @@ export const BookDetail = (props: any) => {
 					<h6>Categories: </h6>
 					<span>
 						{bookDetail.volumeInfo['categories'] ? bookDetail.volumeInfo['categories'].join(', ') : '-'}
-						</span>
+					</span>
 				</div>
 
 				<div className={styles['info-item']}>
@@ -46,7 +49,10 @@ export const BookDetail = (props: any) => {
 
 				<div className={styles['info-item']}>
 					<h6>Rating: </h6>
-					<span>{bookDetail.volumeInfo['averageRating'] ? bookDetail.volumeInfo['averageRating'] : '-'}</span>
+					<span className={styles['ratings']}>
+						{bookDetail.volumeInfo['averageRating'] ? bookDetail.volumeInfo['averageRating'] : '-'}
+						<img className={styles['star-icon']} src={starIcon}></img>
+						</span>
 				</div>
 
 				<div className={styles['info-item']}>
@@ -56,7 +62,7 @@ export const BookDetail = (props: any) => {
 
 				<div className={styles['info-item']}>
 					<h6>Publisher:</h6>
-					<span>{bookDetail.volumeInfo['publisher'] ? bookDetail.volumeInfo['publisher']: '-'}</span>
+					<span>{bookDetail.volumeInfo['publisher'] ? bookDetail.volumeInfo['publisher'] : '-'}</span>
 				</div>
 			</div>
 

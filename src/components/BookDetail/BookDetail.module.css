@@ -47,3 +47,25 @@
 	margin-bottom: 0;
 	margin-right: .5rem;
 }
+
+.flex-btn {
+	display: flex;
+	justify-content: center;
+}
+
+.back-icon {
+	height: 20px;
+	width: auto;
+	align-self: center;
+}
+
+.star-icon {
+	height: 16px;
+	width: auto;
+	margin-left: 4px;
+	align-self: center;
+}
+
+.ratings {
+	display: flex;
+}
