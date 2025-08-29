@@ -17,16 +17,10 @@ export const booksSlice = createSlice({
 		},
 		setId: (state, action: any) => {
 			const id = action.payload;
-			return {
-				...state,
-				bookId: id
-			};
+			state.bookId = id;
 		},
 		removeId: (state: any) => {
-			return {
-				...state,
-				bookId: null
-			}
+			state.bookId = null;
 		}
 	}
 });

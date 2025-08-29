@@ -1,5 +1,3 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { getBookById } from "../../selectors/selectors";
 import { RootState } from "../../store/store";
 import { Book } from "../BookList/BookList";
@@ -8,12 +6,13 @@ import { removeId } from "../../features/books/bookReducer";
 import styles from "./BookDetail.module.css";
 import leftArrow from '../../assets/images/left-arrow.png';
 import starIcon from '../../assets/images/star.png';
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 export const BookDetail = (props: any) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const id = props.bookId;
 	const selectBook = (state: RootState) => getBookById(state, id);
-	const bookDetail: Book = useSelector(selectBook);
+	const bookDetail = useAppSelector<Book>(selectBook);
 
 	const goBack = () => dispatch(removeId());
 

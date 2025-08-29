@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './BookItem.module.css';
 import bookIcon from '../../assets/images/open-book.png';
 import { Book } from '../BookList/BookList';
-import { useDispatch } from 'react-redux';
 import { setId } from '../../features/books/bookReducer';
+import { useAppDispatch } from '../../hooks/hooks';
 
 function BookItem(props: any) {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	
 	const viewDetail = (event: any) => {
 		dispatch(setId(book.id));
